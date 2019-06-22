@@ -14,6 +14,8 @@ class App extends React.Component {
 
     this.getList = this.getList.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.showList = this.showList.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
 
   componentDidMount() {
@@ -39,26 +41,48 @@ class App extends React.Component {
     });
   }
 
+  showList(e) {
+    e.preventDefault();
+    this.setState({
+      showList: true
+    });
+  }
+
+  goBack(e) {
+    e.preventDefault();
+    this.setState({
+      showList: false
+    });
+  }
+
   render() {
-    const { input, list } = this.state;
-    return (
-      <div>
-        <form>
-          <label>
-            Add to yo list :D
-            <input
-              type="text"
-              name="inputToList"
-              value={input}
-              onChange={this.onChange}
-            />
-          </label>
-          <input type="submit" value="put on yo list" />
-        </form>
-        <input type="submit" value="get yo list" />
-        <List list={list} />
-      </div>
-    );
+    const { input, list, showList } = this.state;
+    if (showList) {
+      return (
+        <div>
+          <List list={list} />
+          <input type="submit" value="go back home" onClick={this.goBack} />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <form>
+            <label>
+              Add to yo list :D
+              <input
+                type="text"
+                name="inputToList"
+                value={input}
+                onChange={this.onChange}
+              />
+            </label>
+            <input type="submit" value="put on yo list" />
+          </form>
+          <input type="submit" value="get yo list" onClick={this.showList} />
+        </div>
+      );
+    }
   }
 }
 
