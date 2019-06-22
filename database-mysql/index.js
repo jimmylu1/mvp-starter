@@ -1,20 +1,23 @@
-var mysql = require('mysql');
+var mysql = require("mysql");
+const config = require("./config.js");
 
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'FILL_ME_IN',
-  database : 'test'
+var connection = mysql.createConnection(config);
+
+connection.connect(function(err) {
+  if (err) throw err;
+  console.log("MYSQL CONNECTED");
 });
 
-var selectAll = function(callback) {
-  connection.query('SELECT * FROM items', function(err, results, fields) {
-    if(err) {
-      callback(err, null);
+const getPreferances = (req, res) => {
+  const query =
+    "select * from places inner join preferances on places.id = preferances.placeid inner join users on users.id = preferances.userid = 1;";
+  connection.query(query, (err, results) => {
+    if (err) {
+      res.status(500).send(err);
     } else {
-      callback(null, results);
+      res.status(200).send(results);
     }
   });
 };
 
-module.exports.selectAll = selectAll;
+module.exports = { getPreferances };
