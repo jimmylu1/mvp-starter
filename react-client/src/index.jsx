@@ -26,6 +26,7 @@ class App extends React.Component {
     axios
       .get("/listing")
       .then(res => {
+        console.log("res.data", res.data);
         this.setState({
           list: res.data
         });

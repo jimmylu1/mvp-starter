@@ -7,7 +7,15 @@ const List = ({ list }) => {
     <div>
       <h2> YOUR LIST </h2>
       {list
-        ? list.map((places, key) => <Place name={places.name} key={key} />)
+        ? list.map((places, key) => (
+            <Place
+              name={places.name}
+              location={places.location}
+              img={places.img}
+              price={places.price}
+              key={key}
+            />
+          ))
         : "(none)"}
     </div>
   );
