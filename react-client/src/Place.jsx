@@ -11,9 +11,9 @@ class Place extends React.Component {
 
   showDetails(e) {
     e.preventDefault();
-    this.setState({
-      details: true
-    });
+    this.setState(state => ({
+      details: !state.details
+    }));
   }
 
   render() {
@@ -22,7 +22,7 @@ class Place extends React.Component {
     } else {
       return (
         <div onClick={this.showDetails}>
-          {this.props.name} {this.props.location} {this.props.img}{" "}
+          {this.props.name} {this.props.img} {this.props.location}{" "}
           {this.props.price}
         </div>
       );

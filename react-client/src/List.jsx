@@ -2,10 +2,9 @@ import React from "react";
 import Place from "./Place.jsx";
 
 const List = ({ list }) => {
-  // console.log("list passed down!!!!!", list);
   return (
     <div>
-      <h2> YOUR LIST </h2>
+      <h2> Your list </h2>
       {list
         ? list.map((places, key) => (
             <Place
